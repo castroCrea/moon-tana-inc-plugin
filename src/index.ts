@@ -27,6 +27,12 @@ export default class extends MoonPlugin {
       required: true,
       label: 'Token',
       description: 'The Tana inc plugin token. [Documentation](https://tana.inc/docs/input-api#how-to-get-a-tana-api-token)'
+    },
+    task_super_tag: {
+      type: 'string',
+      required: true,
+      label: 'Task Super Tag',
+      description: 'Copy your task Tana link and get the super tag id https://app.tana.inc?nodeid=HERE_WILL_BE_THE_ID'
     }
   }
 
@@ -91,16 +97,17 @@ export default class extends MoonPlugin {
               filename: Date.now() + '.' + base64Details?.[0]?.split('/').pop()
             }
           } else if (name.startsWith('- [ ]')) {
-            // NOT WORKING
             return {
-              name: node.name,
-              type: 'node'
+              name: node.name.replace('- [ ]', '').trim(),
+              type: 'node',
+              supertags: [{ id: this.settings.task_super_tag }]
             }
           } else if (name.startsWith('- [x]')) {
-            // NOT WORKING
+            // NOT WORKING missing the status
             return {
-              ...node,
-              type: 'node'
+              name: node.name.replace('- [x]', '').trim(),
+              type: 'node',
+              supertags: [{ id: this.settings.task_super_tag }]
             }
           }
           return node

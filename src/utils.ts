@@ -252,8 +252,7 @@ export const handleCodeBlock = (markdown: string) => {
 
 export const isTextADate = (date: string) => {
   try {
-    const isValidDate = new Date(date)
-    return isValidDate instanceof Date && !isNaN(isValidDate.valueOf())
+    return !isNaN(Date.parse(date))
   } catch (err) {
     return false
   }

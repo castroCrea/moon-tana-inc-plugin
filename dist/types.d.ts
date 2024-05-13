@@ -17,13 +17,13 @@ export interface TanaIntermediateAttribute {
     name: string;
     values: string[];
     count: number;
-    dataType?: 'any' | 'url' | 'email' | 'number' | 'date' | 'checkbox';
+    dataType?: 'any' | 'url' | 'email' | 'number' | 'date';
 }
 export interface TanaIntermediateSupertag {
     uid: string;
     name: string;
 }
-export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean' | 'checkbox';
+export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean';
 export type TanaIntermediateNode = {
     /**
      * Contents of the node.

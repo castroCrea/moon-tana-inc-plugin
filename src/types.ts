@@ -40,7 +40,7 @@ export interface TanaIntermediateAttribute {
   values: string[]
   count: number
   // will default to any
-  dataType?: 'any' | 'url' | 'email' | 'number' | 'date' | 'checkbox'
+  dataType?: 'any' | 'url' | 'email' | 'number' | 'date'
 }
 
 export interface TanaIntermediateSupertag {
@@ -48,7 +48,7 @@ export interface TanaIntermediateSupertag {
   name: string
 }
 
-export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean' | 'checkbox'
+export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean'
 
 export type TanaIntermediateNode = {
 
