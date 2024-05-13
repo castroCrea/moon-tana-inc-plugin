@@ -31,21 +31,28 @@ class default_1 extends moon_1.MoonPlugin {
                 required: true,
                 label: 'Task Super Tag',
                 description: 'Copy your task Tana link and get the super tag id https://app.tana.inc?nodeid=HERE_WILL_BE_THE_ID'
+            },
+            template: {
+                type: 'text',
+                required: true,
+                label: 'Template of capture',
+                description: 'Format your note result inside Tana.inc. [documentation](https://github.com/castroCrea/moon-tana-inc-plugin/blob/main/README.md)',
+                default: template_1.DEFAULT_TEMPLATE
             }
         };
         this.settings = {
-            token: ''
+            token: '',
+            task_super_tag: '',
+            template: template_1.DEFAULT_TEMPLATE
         };
         this.integration = {
             callback: ({ context, markdown }) => __awaiter(this, void 0, void 0, function* () {
-                var _a, _b, _c, _d, _e, _f;
+                var _a, _b, _c, _d, _e;
                 try {
-                    console.log('Tana Inc integration');
-                    const handleDateContent = (0, moon_utils_1.turnDate)({ content: template_1.DEFAULT_TEMPLATE });
-                    (_a = this.log) === null || _a === void 0 ? void 0 : _a.call(this, handleDateContent);
+                    const handleDateContent = (0, moon_utils_1.turnDate)({ content: this.settings.template });
                     const searchObj = Object.assign({ content: markdown }, context);
-                    const handlePropertiesContent = (_b = (0, moon_utils_1.handleReplacingProperties)({ content: handleDateContent, searchObj })) !== null && _b !== void 0 ? _b : '';
-                    const handleConditionContent = (_d = (_c = (0, moon_utils_1.handleConditions)({ content: handlePropertiesContent, searchObj })) === null || _c === void 0 ? void 0 : _c.trim()) !== null && _d !== void 0 ? _d : '';
+                    const handlePropertiesContent = (_a = (0, moon_utils_1.handleReplacingProperties)({ content: handleDateContent, searchObj })) !== null && _a !== void 0 ? _a : '';
+                    const handleConditionContent = (_c = (_b = (0, moon_utils_1.handleConditions)({ content: handlePropertiesContent, searchObj })) === null || _b === void 0 ? void 0 : _b.trim()) !== null && _c !== void 0 ? _c : '';
                     const handleCodeBlockContent = (0, utils_1.handleCodeBlock)(handleConditionContent);
                     const lines = handleCodeBlockContent.split('\n');
                     const tanaNodes = lines.map((name) => {
@@ -99,7 +106,7 @@ class default_1 extends moon_1.MoonPlugin {
                             targetNodeId: 'INBOX',
                             nodes: [Object.assign(Object.assign({}, parentNode), { children: (0, utils_1.removeEmptyAtStart)((0, utils_1.removeEmptyAtEnd)(tanaNodes)) })]
                         };
-                    (_e = this.log) === null || _e === void 0 ? void 0 : _e.call(this, JSON.stringify({ payload }));
+                    (_d = this.log) === null || _d === void 0 ? void 0 : _d.call(this, JSON.stringify({ payload }));
                     yield fetch('https://europe-west1-tagr-prod.cloudfunctions.net/addToNodeV2', {
                         method: 'POST',
                         headers: {
@@ -111,7 +118,7 @@ class default_1 extends moon_1.MoonPlugin {
                     return true;
                 }
                 catch (err) {
-                    (_f = this.log) === null || _f === void 0 ? void 0 : _f.call(this, JSON.stringify({ err }));
+                    (_e = this.log) === null || _e === void 0 ? void 0 : _e.call(this, JSON.stringify({ err }));
                     return false;
                 }
             }),
@@ -119,8 +126,9 @@ class default_1 extends moon_1.MoonPlugin {
         };
         if (!props)
             return;
+        props.helpers.moonLog(JSON.stringify({ this: this.settings, settings: props.settings }));
         if (props.settings)
-            this.settings = props.settings;
+            this.settings = Object.assign(Object.assign({}, this.settings), props.settings);
         this.log = props.helpers.moonLog;
     }
 }

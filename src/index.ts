@@ -11,10 +11,25 @@ interface TanaIncSettingsDescription extends PluginSettingsDescription {
     label: string
     description: string
   }
+  task_super_tag: {
+    type: 'string'
+    required: boolean
+    label: string
+    description: string
+  }
+  template: {
+    type: 'text'
+    required: boolean
+    label: string
+    description: string
+    default: string
+  }
 }
 
 interface TanaIncSettings extends MoonPluginSettings {
   token: string
+  task_super_tag: string
+  template: string
 }
 
 export default class extends MoonPlugin {
@@ -33,11 +48,20 @@ export default class extends MoonPlugin {
       required: true,
       label: 'Task Super Tag',
       description: 'Copy your task Tana link and get the super tag id https://app.tana.inc?nodeid=HERE_WILL_BE_THE_ID'
+    },
+    template: {
+      type: 'text',
+      required: true,
+      label: 'Template of capture',
+      description: 'Format your note result inside Tana.inc. [documentation](https://github.com/castroCrea/moon-tana-inc-plugin/blob/main/README.md)',
+      default: DEFAULT_TEMPLATE
     }
   }
 
   settings: TanaIncSettings = {
-    token: ''
+    token: '',
+    task_super_tag: '',
+    template: DEFAULT_TEMPLATE
   }
 
   log: ((log: string) => void) | undefined
@@ -46,7 +70,8 @@ export default class extends MoonPlugin {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     super(props)
     if (!props) return
-    if (props.settings) this.settings = props.settings
+    props.helpers.moonLog(JSON.stringify({ this: this.settings, settings: props.settings }))
+    if (props.settings) this.settings = { ...this.settings, ...props.settings }
     this.log = props.helpers.moonLog
   }
 
@@ -58,11 +83,7 @@ export default class extends MoonPlugin {
     }
     ) => {
       try {
-        console.log('Tana Inc integration')
-
-        const handleDateContent = turnDate({ content: DEFAULT_TEMPLATE })
-
-        this.log?.(handleDateContent)
+        const handleDateContent = turnDate({ content: this.settings.template })
 
         const searchObj = {
           content: markdown,

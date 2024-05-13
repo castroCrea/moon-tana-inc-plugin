@@ -1,1 +1,1 @@
-export declare const DEFAULT_TEMPLATE = "{{content}}\n{{DATE}}YYYY-MM-DD{{END_DATE}}\n{{IF people.0.name}}Author: {{people.0.name}}{{END_IF people.0.name}}\n{{IF source.url}}Source: {{source.url}}{{END_IF source.url}}\n";
+export declare const DEFAULT_TEMPLATE = "{{content}}\n{{IF source.url}}Source: <a href=\"{{source.url}}\">{{source.title}}</a>{{END_IF source.url}}\n{{IF people.0.name}}Author: {{people.0.name}}{{END_IF people.0.name}}\n";

@@ -1,53 +1,3 @@
-export interface TanaIntermediateFile {
-  // version flag for the import format.
-  version: 'TanaIntermediateFile V0.1'
-
-  // summary of the contents in the file
-  summary: TanaIntermediateSummary
-
-  // all nodes
-  nodes: TanaIntermediateNode[]
-
-  // all attributes
-  attributes?: TanaIntermediateAttribute[]
-
-  // all attributes
-  supertags?: TanaIntermediateSupertag[]
-}
-
-export interface TanaIntermediateSummary {
-  // the number of leaf nodes
-  leafNodes: number
-
-  // the number of root level nodes (will go into Library)
-  topLevelNodes: number
-
-  // the total number of nodes found
-  totalNodes: number
-
-  // number of nodes that will end up as day nodes in the calendar
-  calendarNodes: number
-
-  // the number of fields
-  fields: number
-
-  // number of broken references
-  brokenRefs: number
-}
-
-export interface TanaIntermediateAttribute {
-  name: string
-  values: string[]
-  count: number
-  // will default to any
-  dataType?: 'any' | 'url' | 'email' | 'number' | 'date'
-}
-
-export interface TanaIntermediateSupertag {
-  uid: string
-  name: string
-}
-
 export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean'
 
 export type TanaIntermediateNode = {
@@ -61,8 +11,6 @@ export type TanaIntermediateNode = {
    *
    * Link formats:
    * - external content: [See Tana](https://wwww.tana.inc)
-   * - internal: [[uid]]
-   * - internal with alias: [test page]([[uid]])
    */
   name: string
 
@@ -72,9 +20,6 @@ export type TanaIntermediateNode = {
   // children
   children?: TanaIntermediateNode[]
 
-  // reference uids
-  refs?: string[]
-
   // created at timestamp
   createdAt: number
 
@@ -83,12 +28,6 @@ export type TanaIntermediateNode = {
 
   // the various types of nodes we support
   dataType: NodeType
-
-  // used for media url
-  mediaUrl?: string
-
-  // for code blocks
-  codeLanguage?: string
 
   supertags?: string[]
 } | {

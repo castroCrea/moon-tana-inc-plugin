@@ -6,9 +6,24 @@ interface TanaIncSettingsDescription extends PluginSettingsDescription {
         label: string;
         description: string;
     };
+    task_super_tag: {
+        type: 'string';
+        required: boolean;
+        label: string;
+        description: string;
+    };
+    template: {
+        type: 'text';
+        required: boolean;
+        label: string;
+        description: string;
+        default: string;
+    };
 }
 interface TanaIncSettings extends MoonPluginSettings {
     token: string;
+    task_super_tag: string;
+    template: string;
 }
 export default class extends MoonPlugin {
     name: string;

@@ -8,9 +8,16 @@ Send Note from your OS to Tana.inc with your current context. Make it faster to 
 
 Get tana token
 
+Go to settings
 ![](./token.png)
+
+Create a token
 ![](./create.png)
+
+Copy the token
 ![](./copy.png)
+
+Past it inside Moon Jot Settings
 ![](./moon_settings.png)
 
 ## Features
@@ -18,6 +25,63 @@ Get tana token
 Handle dates like YYYY-MM-DD
 Handle drop image
 Handle code blocks
+
+## Template
+
+```
+{{content}}
+{{IF source.url}}Source: <a href="{{source.url}}">{{source.title}}</a>{{END_IF source.url}}
+{{IF people.0.name}}Author: {{people.0.name}}{{END_IF people.0.name}}
+```
+
+
+## Condition
+
+### Is defined
+
+You can insert content based on a condition.
+Currently, the condition only checks if something exists or does not exist.
+```
+{{IF ...}}Write something{{END_IF ...}}
+
+// Example:
+{{IF author}}Author: {{author}}{{END_IF author}}
+```
+
+### You can also do some condition with equality
+
+#### === undefined
+```
+{{IF author === undefined}}content{{END_IF author}}
+```
+
+#### === some text
+```
+{{IF content === some text}}content{{END_IF content}}
+```
+
+#### !== some text
+```
+{{IF content !== some text}}content{{END_IF content}}{{IF content !== some text hey }}content different{{END_IF content}}
+```
+
+#### .includes(something)
+```
+{{IF content.includes(some t)}}content{{END_IF content}}{{IF content.includes(some text hey) }}content different{{END_IF content}}
+```
+
+#### .startWidth(something)
+```
+{{IF SOURCE.TEXT.startWidth(- [ ])}}content{{END_IF SOURCE.TEXT}}
+```
+
+## Date
+
+You can format the date as YYYY-MM-DD HH:mm:ss.
+```
+{{DATE}}YYYY-MM-DD{{END_DATE}}
+{{DATE}}HH:mm{{END_DATE}}
+```
 
 ## Development
 

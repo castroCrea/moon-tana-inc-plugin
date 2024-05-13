@@ -1,11 +1,11 @@
 {
   "name": "@moonjot/moon-tana-inc-plugin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Moon sample plugin for Moon",
   "main": "./dist/index.js",
   "dependencies": {
     "@moonjot/moon": "^0.1.72",
-    "@moonjot/moon-utils": "^0.0.3"
+    "@moonjot/moon-utils": "^0.0.4"
   },
   "repository": {
     "type": "git",

@@ -1,28 +1,3 @@
-export interface TanaIntermediateFile {
-    version: 'TanaIntermediateFile V0.1';
-    summary: TanaIntermediateSummary;
-    nodes: TanaIntermediateNode[];
-    attributes?: TanaIntermediateAttribute[];
-    supertags?: TanaIntermediateSupertag[];
-}
-export interface TanaIntermediateSummary {
-    leafNodes: number;
-    topLevelNodes: number;
-    totalNodes: number;
-    calendarNodes: number;
-    fields: number;
-    brokenRefs: number;
-}
-export interface TanaIntermediateAttribute {
-    name: string;
-    values: string[];
-    count: number;
-    dataType?: 'any' | 'url' | 'email' | 'number' | 'date';
-}
-export interface TanaIntermediateSupertag {
-    uid: string;
-    name: string;
-}
 export type NodeType = 'field' | 'image' | 'codeblock' | 'node' | 'date' | 'boolean';
 export type TanaIntermediateNode = {
     /**
@@ -34,18 +9,13 @@ export type TanaIntermediateNode = {
      *
      * Link formats:
      * - external content: [See Tana](https://wwww.tana.inc)
-     * - internal: [[uid]]
-     * - internal with alias: [test page]([[uid]])
      */
     name: string;
     description?: string;
     children?: TanaIntermediateNode[];
-    refs?: string[];
     createdAt: number;
     editedAt: number;
     dataType: NodeType;
-    mediaUrl?: string;
-    codeLanguage?: string;
     supertags?: string[];
 } | {
     filenames: string;
