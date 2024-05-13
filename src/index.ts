@@ -134,23 +134,24 @@ export default class extends MoonPlugin {
           return node
         })
 
-        const parentNode = tanaNodes.shift()
+        const tanaNodesTrimmed = removeEmptyAtStart(
+          removeEmptyAtEnd(tanaNodes))
+
+        const parentNode = tanaNodesTrimmed.shift()
 
         const payload = parentNode?.dataType === 'file'
           ? {
               targetNodeId: 'INBOX',
               nodes: [
                 parentNode,
-                ...removeEmptyAtStart(
-                  removeEmptyAtEnd(tanaNodes))
+                ...tanaNodesTrimmed
               ]
             }
           : {
               targetNodeId: 'INBOX',
               nodes: [{
                 ...parentNode,
-                children: removeEmptyAtStart(
-                  removeEmptyAtEnd(tanaNodes))
+                children: tanaNodesTrimmed
               }]
             }
 

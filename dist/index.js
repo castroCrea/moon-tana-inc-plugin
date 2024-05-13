@@ -93,18 +93,19 @@ class default_1 extends moon_1.MoonPlugin {
                         }
                         return node;
                     });
-                    const parentNode = tanaNodes.shift();
+                    const tanaNodesTrimmed = (0, utils_1.removeEmptyAtStart)((0, utils_1.removeEmptyAtEnd)(tanaNodes));
+                    const parentNode = tanaNodesTrimmed.shift();
                     const payload = (parentNode === null || parentNode === void 0 ? void 0 : parentNode.dataType) === 'file'
                         ? {
                             targetNodeId: 'INBOX',
                             nodes: [
                                 parentNode,
-                                ...(0, utils_1.removeEmptyAtStart)((0, utils_1.removeEmptyAtEnd)(tanaNodes))
+                                ...tanaNodesTrimmed
                             ]
                         }
                         : {
                             targetNodeId: 'INBOX',
-                            nodes: [Object.assign(Object.assign({}, parentNode), { children: (0, utils_1.removeEmptyAtStart)((0, utils_1.removeEmptyAtEnd)(tanaNodes)) })]
+                            nodes: [Object.assign(Object.assign({}, parentNode), { children: tanaNodesTrimmed })]
                         };
                     (_d = this.log) === null || _d === void 0 ? void 0 : _d.call(this, JSON.stringify({ payload }));
                     yield fetch('https://europe-west1-tagr-prod.cloudfunctions.net/addToNodeV2', {
