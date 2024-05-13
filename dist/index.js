@@ -36,7 +36,7 @@ class default_1 extends moon_1.MoonPlugin {
                 type: 'text',
                 required: true,
                 label: 'Template of capture',
-                description: 'Format your note result inside Tana.inc. [documentation](https://github.com/castroCrea/moon-tana-inc-plugin/blob/main/README.md)',
+                description: 'Format your note result inside Tana.inc. [Documentation](https://github.com/castroCrea/moon-tana-inc-plugin/blob/main/README.md)',
                 default: template_1.DEFAULT_TEMPLATE
             }
         };
