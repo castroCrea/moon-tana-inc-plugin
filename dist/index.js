@@ -127,7 +127,6 @@ class default_1 extends moon_1.MoonPlugin {
         };
         if (!props)
             return;
-        props.helpers.moonLog(JSON.stringify({ this: this.settings, settings: props.settings }));
         if (props.settings)
             this.settings = Object.assign(Object.assign({}, this.settings), props.settings);
         this.log = props.helpers.moonLog;

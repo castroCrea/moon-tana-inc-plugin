@@ -70,7 +70,6 @@ export default class extends MoonPlugin {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     super(props)
     if (!props) return
-    props.helpers.moonLog(JSON.stringify({ this: this.settings, settings: props.settings }))
     if (props.settings) this.settings = { ...this.settings, ...props.settings }
     this.log = props.helpers.moonLog
   }
