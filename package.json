@@ -1,14 +1,15 @@
 {
-  "name": "@moonjot/moon-sample-plugin",
+  "name": "@moonjot/moon-tana-inc-plugin",
   "version": "0.0.0",
   "description": "Moon sample plugin for Moon",
   "main": "./dist/index.js",
   "dependencies": {
-    "@moonjot/moon": "^0.1.65"
+    "@moonjot/moon": "^0.1.72",
+    "@moonjot/moon-utils": "^0.0.3"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/castroCrea/moon-sample-plugin"
+    "url": "https://github.com/castroCrea/moon-tana-inc-plugin"
   },
   "types": "./dist/index.d.ts",
   "scripts": {

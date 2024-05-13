@@ -1,0 +1,1 @@
+export declare const DEFAULT_TEMPLATE = "{{content}}\n{{DATE}}YYYY-MM-DD{{END_DATE}}\n{{IF people.0.name}}Author: {{people.0.name}}{{END_IF people.0.name}}\n{{IF source.url}}Source: {{source.url}}{{END_IF source.url}}\n";

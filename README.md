@@ -1,18 +1,25 @@
-# Moon Plugin Sample - Plugin Development
+# Moon [Tana Inc](https://tana.inc/) Plugin
 
-<span class="badge-npmversion"><a href="https://npmjs.org/package/@moonjot/moon-sample-plugin" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@moonjot/moon-sample-plugin.svg" alt="NPM version" /></a></span>
-<span class="badge-npmdownloads"><a href="https://npmjs.org/package/@moonjot/moon-sample-plugin" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@moonjot/moon-sample-plugin.svg" alt="NPM downloads" /></a></span>
+<span class="badge-npmversion"><a href="https://npmjs.org/package/@moonjot/moon-tana-inc-plugin" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@moonjot/moon-tana-inc-plugin.svg" alt="NPM version" /></a></span>
+<span class="badge-npmdownloads"><a href="https://npmjs.org/package/@moonjot/moon-tana-inc-plugin" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@moonjot/moon-tana-inc-plugin.svg" alt="NPM downloads" /></a></span>
 
 
-Moon Jot is base on a plugin system that make easy to develop your own integration and workflows
+Send Note from your OS to Tana.inc with your current context. Make it faster to take note into Tana.inc
 
-# Develop on Moon
+Get tana token
 
-Check the doc here https://github.com/castroCrea/moon/blob/main/doc/Plugin_Development.md
+![](./token.png)
+![](./create.png)
+![](./copy.png)
+![](./moon_settings.png)
 
-Check also the tutorial video https://youtu.be/dvoalnWBwv4 📹
+## Features
 
-## Installation
+Handle dates like YYYY-MM-DD
+Handle drop image
+Handle code blocks
+
+## Development
 
 ```bash
 yarn
