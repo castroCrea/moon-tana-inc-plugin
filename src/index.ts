@@ -1,4 +1,4 @@
-import { type Context, MoonPlugin, type MoonPluginConstructorProps, type MoonPluginSettings, type PluginSettingsDescription } from '@moonjot/moon'
+import { type Context, MoonPlugin, type MoonPluginConstructorProps, type MoonPluginSettings, type PluginSettingsDescription, type EndpointCallbackItem } from '@moonjot/moon'
 import { handleConditions, handleReplacingProperties, turnDate } from '@moonjot/moon-utils'
 import { DEFAULT_TEMPLATE } from './template'
 import { handleCodeBlock, isTextADate, removeEmptyAtEnd, removeEmptyAtStart } from './utils'
@@ -72,7 +72,35 @@ export default class extends MoonPlugin {
     if (!props) return
     if (props.settings) this.settings = { ...this.settings, ...props.settings }
     this.log = props.helpers.moonLog
+
+    this.settingsButtons = [
+      {
+        type: 'button',
+        callback: () => {
+          window.open('https://youtu.be/0c8MZ93wCzI?si=-86WglYv2bad6Tnh', '_blank')
+        },
+        label: 'Open Tana.inc Plugin Demo',
+        description: ''
+      }
+    ]
+    this.settingsButtons = [
+      {
+        type: 'button',
+        callback: () => {
+          window.open('moonjot://moon-tana-inc-plugin/template', '_blank')
+        },
+        label: 'Reset template or update with last version',
+        description: ''
+      }
+    ]
   }
+
+  endpointCallbacks = [{
+    endpoint: 'moon-tana-inc-plugin/settings',
+    callback: ({ saveSettings }) => {
+      saveSettings({ key: 'template', value: DEFAULT_TEMPLATE })
+    }
+  }] as EndpointCallbackItem[]
 
   integration = {
     callback: async ({ context, markdown }: {

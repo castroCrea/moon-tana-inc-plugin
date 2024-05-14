@@ -130,6 +130,16 @@ class default_1 extends moon_1.MoonPlugin {
         if (props.settings)
             this.settings = Object.assign(Object.assign({}, this.settings), props.settings);
         this.log = props.helpers.moonLog;
+        this.settingsButtons = [
+            {
+                type: 'button',
+                callback: () => {
+                    window.open('https://youtu.be/0c8MZ93wCzI?si=-86WglYv2bad6Tnh', '_blank');
+                },
+                label: 'Open Tana.inc Plugin Demo',
+                description: ''
+            }
+        ];
     }
 }
 exports.default = default_1;

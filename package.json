@@ -1,7 +1,7 @@
 {
   "name": "@moonjot/moon-tana-inc-plugin",
   "version": "0.0.5",
-  "description": "Moon sample plugin for Moon",
+  "description": "Moon Tana.inc plugin for Moon Jot",
   "main": "./dist/index.js",
   "dependencies": {
     "@moonjot/moon": "^0.1.72",
@@ -20,8 +20,10 @@
     "watch": "tsc --watch"
   },
   "keywords": [
-    "sample",
+    "tana.inc",
+    "tana",
     "plugin",
+    "moonJot",
     "moon",
     "integration"
   ],
