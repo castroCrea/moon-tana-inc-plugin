@@ -144,9 +144,7 @@ class default_1 extends moon_1.MoonPlugin {
                 },
                 label: 'Open Tana.inc Plugin Demo',
                 description: ''
-            }
-        ];
-        this.settingsButtons = [
+            },
             {
                 type: 'button',
                 callback: () => {

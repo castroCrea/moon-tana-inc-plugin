@@ -81,9 +81,7 @@ export default class extends MoonPlugin {
         },
         label: 'Open Tana.inc Plugin Demo',
         description: ''
-      }
-    ]
-    this.settingsButtons = [
+      },
       {
         type: 'button',
         callback: () => {
