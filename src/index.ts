@@ -85,7 +85,7 @@ export default class extends MoonPlugin {
       {
         type: 'button',
         callback: () => {
-          window.open('moonjot://moon-tana-inc-plugin/template', '_blank')
+          window.open('moonjot://moon-tana-inc-plugin/settings', '_blank')
         },
         label: 'Reset template or update with last version',
         description: ''
