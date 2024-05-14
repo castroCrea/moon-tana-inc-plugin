@@ -1,4 +1,4 @@
-import { type Context, MoonPlugin, type MoonPluginConstructorProps, type MoonPluginSettings, type PluginSettingsDescription } from '@moonjot/moon';
+import { type Context, MoonPlugin, type MoonPluginConstructorProps, type MoonPluginSettings, type PluginSettingsDescription, type EndpointCallbackItem } from '@moonjot/moon';
 interface TanaIncSettingsDescription extends PluginSettingsDescription {
     token: {
         type: 'string';
@@ -32,6 +32,7 @@ export default class extends MoonPlugin {
     settings: TanaIncSettings;
     log: ((log: string) => void) | undefined;
     constructor(props?: MoonPluginConstructorProps<TanaIncSettings>);
+    endpointCallbacks: EndpointCallbackItem[];
     integration: {
         callback: ({ context, markdown }: {
             html: string;

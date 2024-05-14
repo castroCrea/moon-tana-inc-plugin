@@ -45,6 +45,12 @@ class default_1 extends moon_1.MoonPlugin {
             task_super_tag: '',
             template: template_1.DEFAULT_TEMPLATE
         };
+        this.endpointCallbacks = [{
+                endpoint: 'moon-tana-inc-plugin/settings',
+                callback: ({ saveSettings }) => {
+                    saveSettings({ key: 'template', value: template_1.DEFAULT_TEMPLATE });
+                }
+            }];
         this.integration = {
             callback: ({ context, markdown }) => __awaiter(this, void 0, void 0, function* () {
                 var _a, _b, _c, _d, _e;
@@ -137,6 +143,16 @@ class default_1 extends moon_1.MoonPlugin {
                     window.open('https://youtu.be/0c8MZ93wCzI?si=-86WglYv2bad6Tnh', '_blank');
                 },
                 label: 'Open Tana.inc Plugin Demo',
+                description: ''
+            }
+        ];
+        this.settingsButtons = [
+            {
+                type: 'button',
+                callback: () => {
+                    window.open('moonjot://moon-tana-inc-plugin/template', '_blank');
+                },
+                label: 'Reset template or update with last version',
                 description: ''
             }
         ];
