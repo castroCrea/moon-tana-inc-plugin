@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DEFAULT_TEMPLATE = void 0;
-exports.DEFAULT_TEMPLATE = `
-{{content}}
-
+exports.DEFAULT_TEMPLATE = `{{content}}
 {{IF source.url}}
 {{IF source.title}}{{source.title}}{{END_IF source.title}}
 {{IF source.url}}<a href="{{source.url}}">{{source.title}}</a>{{END_IF source.url}}
@@ -12,7 +10,6 @@ exports.DEFAULT_TEMPLATE = `
 Timestamp: <a href="{{source.timestamp.0.url}}">{{source.timestamp.0.timestamp}}</a>
 {{END_IF source.timestamp}}
 {{END_IF source.url}}
-
 {{IF people.0.name}}
 {{IF people.0.name}}{{people.0.name}}{{END_IF people.0.name}}
 {{IF people.0.job}}{{people.0.job}}{{END_IF people.0.job}}
@@ -27,6 +24,5 @@ Timestamp: <a href="{{source.timestamp.0.url}}">{{source.timestamp.0.timestamp}}
 {{IF people.0.mastodon.0}}mastodon: <a href="{{people.0.mastodon.0}}">{{people.0.mastodon.0}}</a>{{END_IF people.0.mastodon.0}}
 {{IF people.0.youtube.0}}youtube: <a href="{{people.0.youtube.0}}">{{people.0.youtube.0}}</a>{{END_IF people.0.youtube.0}}
 {{IF people.0.website.0}}website: <a href="{{people.0.website.0}}">{{people.0.website.0}}</a>{{END_IF people.0.website.0}}
-{{END_IF people.0}}
-`;
+{{END_IF people.0}}`;
 //# sourceMappingURL=template.js.map
