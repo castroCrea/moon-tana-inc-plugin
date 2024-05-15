@@ -1,6 +1,6 @@
 {
   "name": "@moonjot/moon-tana-inc-plugin",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Moon Tana.inc plugin for Moon Jot",
   "main": "./dist/index.js",
   "dependencies": {
