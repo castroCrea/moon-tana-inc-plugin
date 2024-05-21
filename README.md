@@ -22,6 +22,13 @@ Past it inside Moon Jot Settings
 
 ## Features
 
+Support [[date:]] https://tana.inc/docs/tana-paste (Contact me for other Tana past support 🙏)
+Handle dates like YYYY-MM-DD
+Handle drop image
+Handle code blocks
+
+## Features
+
 Handle dates like YYYY-MM-DD
 Handle drop image
 Handle code blocks
