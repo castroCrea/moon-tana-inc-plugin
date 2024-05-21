@@ -3,6 +3,10 @@ import { handleConditions, handleReplacingProperties, turnDate } from '@moonjot/
 import { handleCodeBlock, isTextADate, removeEmptyAtEnd, removeEmptyAtStart } from './utils'
 import { type TanaIntermediateNode } from './types'
 
+const REGEX_REMOVE_LIST = /^(\s*-|-)\s/gm
+const REGEX_LINK_TO_IMAGE = /!\[\]\((http.*?)\)/gm
+const REGEX_DATE_ANCHOR = /(\\|)\[(\\|)\[date:(.*?)(\\|)\](\\|)\]/gm
+
 export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log }: {
   markdown: string
   template: string
@@ -10,6 +14,7 @@ export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log
   log?: ((log: string) => void)
   context: Context
 }) => {
+  log?.(JSON.stringify(markdown))
   try {
     const handleDateContent = turnDate({ content: template })
 
@@ -26,12 +31,17 @@ export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log
 
     const lines = handleCodeBlockContent.split('\n')
 
-    const tanaNodes: Array<Partial<TanaIntermediateNode>> = lines.map((name) => {
+    const tanaNodes: Array<Partial<TanaIntermediateNode>> = lines.filter(l => !!l).map((name) => {
       const node = {
         name
       }
 
-      if (isTextADate(name)) {
+      if (REGEX_DATE_ANCHOR.exec(name)) {
+        return {
+          name: name.replaceAll(REGEX_DATE_ANCHOR, '<span data-inlineref-date=\'{"dateTimeString":"$3"}\'></span>'),
+          type: 'node'
+        }
+      } else if (isTextADate(name)) {
         return {
           dataType: 'date',
           name
@@ -44,6 +54,11 @@ export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log
           file: base64Details?.pop(),
           contentType: base64Details?.[0],
           filename: Date.now() + '.' + base64Details?.[0]?.split('/').pop()
+        }
+      } else if (REGEX_LINK_TO_IMAGE.exec(name)) {
+        return {
+          name: node.name.replaceAll(REGEX_LINK_TO_IMAGE, '[$1]($1)').trim(),
+          type: 'node'
         }
       } else if (name.startsWith('- [ ]')) {
         return {
@@ -58,6 +73,11 @@ export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log
           type: 'node',
           supertags: [{ id: taskSuperTag }]
         }
+      } else if (REGEX_REMOVE_LIST.exec(name)) {
+        return {
+          name: node.name.replace(REGEX_REMOVE_LIST, '').trim(),
+          type: 'node'
+        }
       }
       return node
     })
@@ -67,7 +87,7 @@ export const tanaIntegration = ({ context, markdown, template, taskSuperTag, log
 
     const parentNode = tanaNodesTrimmed.shift()
 
-    return parentNode?.dataType === 'file'
+    return parentNode?.dataType && ['file', 'date'].includes(parentNode.dataType)
       ? [
           parentNode,
           ...tanaNodesTrimmed
