@@ -6,6 +6,8 @@ const utils_1 = require("./utils");
 const REGEX_REMOVE_LIST = /^(\s*-|-)\s/gm;
 const REGEX_LINK_TO_IMAGE = /!\[\]\((http.*?)\)/gm;
 const REGEX_DATE_ANCHOR = /(\\|)\[(\\|)\[date:(.*?)(\\|)\](\\|)\]/gm;
+const REGEX_TAG_ANCHOR = /(\\|)\[(\\|)\[(.*?)(\\|)\](\\|)\]/gm;
+const REGEX_LOCAL_LINK_ANCHOR = /\#(.*?)/gm;
 const tanaIntegration = ({ context, markdown, template, taskSuperTag, log }) => {
     var _a, _b, _c;
     log === null || log === void 0 ? void 0 : log(JSON.stringify(markdown));
@@ -24,6 +26,18 @@ const tanaIntegration = ({ context, markdown, template, taskSuperTag, log }) => 
             if (REGEX_DATE_ANCHOR.exec(name)) {
                 return {
                     name: name.replaceAll(REGEX_DATE_ANCHOR, '<span data-inlineref-date=\'{"dateTimeString":"$3"}\'></span>'),
+                    type: 'node'
+                };
+            }
+            else if (REGEX_LOCAL_LINK_ANCHOR.exec(name)) {
+                return {
+                    name: name.replaceAll(REGEX_LOCAL_LINK_ANCHOR, '<span data-inlineref-node=\'\'>$3</span>'),
+                    type: 'node'
+                };
+            }
+            else if (REGEX_TAG_ANCHOR.exec(name)) {
+                return {
+                    name: name.replaceAll(REGEX_DATE_ANCHOR, '<span data-tag=\'$3\'></span>'),
                     type: 'node'
                 };
             }

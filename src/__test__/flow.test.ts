@@ -87,7 +87,7 @@ describe('Flow', () => {
 
     const result = tanaIntegration({ markdown, context, template, taskSuperTag: 'SUPER_TAG' })
 
-    expect(result).toEqual([{ children: [{ name: 'Obsidian - Moon Jot : Add Task' }, { name: '<a href="https://www.youtube.com/watch?v=OtEfVc6U5DQ&list=PLmTKOO83vuwUZxmzkBjBwEt3hgDGsupXT&index=7&ab_channel=PaoCas">Obsidian - Moon Jot : Add Task</a>' }, { name: '![](https://i.ytimg.com/vi_webp/OtEfVc6U5DQ/hqdefault.webp)' }, { name: 'Timestamp: <a href="https://www.youtube.com/watch?v=OtEfVc6U5DQ&list=PLmTKOO83vuwUZxmzkBjBwEt3hgDGsupXT&index=7&ab_channel=PaoCas&t=0.790997s">0.790997</a>' }, { name: 'Pao Cas' }, { name: 'youtube: <a href="https://www.youtube.com/@paocto">https://www.youtube.com/@paocto</a>' }], name: 'This is a tweet' }])
+    expect(result).toEqual([{ children: [{ name: 'Obsidian - Moon Jot : Add Task' }, { name: '<a href="https://www.youtube.com/watch?v=OtEfVc6U5DQ&list=PLmTKOO83vuwUZxmzkBjBwEt3hgDGsupXT&index=7&ab_channel=PaoCas">Obsidian - Moon Jot : Add Task</a>' }, { name: '[https://i.ytimg.com/vi_webp/OtEfVc6U5DQ/hqdefault.webp](https://i.ytimg.com/vi_webp/OtEfVc6U5DQ/hqdefault.webp)', type: 'node' }, { name: 'Timestamp: <a href="https://www.youtube.com/watch?v=OtEfVc6U5DQ&list=PLmTKOO83vuwUZxmzkBjBwEt3hgDGsupXT&index=7&ab_channel=PaoCas&t=0.790997s">0.790997</a>' }, { name: 'Pao Cas' }, { name: 'youtube: <a href="https://www.youtube.com/@paocto">https://www.youtube.com/@paocto</a>' }], name: 'This is a tweet' }])
   })
 
   it('Flow with twitter', () => {
@@ -198,10 +198,10 @@ describe('Flow', () => {
       clipContent: false
     }
     const markdown = `
-- sdsdds
-  - sddsds
-  - dsdsds
-  `
+  - sdsdds
+    - sddsds
+    - dsdsds
+    `
 
     const result = tanaIntegration({ markdown, context, template, taskSuperTag: 'SUPER_TAG' })
 
@@ -209,14 +209,14 @@ describe('Flow', () => {
       name: 'sdsdds',
       type: 'node',
       children:
-        [{ name: 'sddsds', type: 'node' },
-          { name: 'dsdsds', type: 'node' },
-          { name: '  ' },
-          { name: 'regex101: build, test, and debug regex' },
-          { name: '<a href="https://regex101.com/codegen?language=javascript">regex101: build, test, and debug regex</a>' },
-          { name: 'Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/.NET, Rust.' },
-          { name: '[https://regex101.com/preview/](https://regex101.com/preview/)', type: 'node' },
-          { name: 'regex101' }, { name: 'twitter: <a href="@regex101">@regex101</a>' }]
+          [{ name: 'sddsds', type: 'node' },
+            { name: 'dsdsds', type: 'node' },
+            { name: '  ' },
+            { name: 'regex101: build, test, and debug regex' },
+            { name: '<a href="https://regex101.com/codegen?language=javascript">regex101: build, test, and debug regex</a>' },
+            { name: 'Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/.NET, Rust.' },
+            { name: '[https://regex101.com/preview/](https://regex101.com/preview/)', type: 'node' },
+            { name: 'regex101' }, { name: 'twitter: <a href="@regex101">@regex101</a>' }]
     }])
   })
 
@@ -247,5 +247,50 @@ describe('Flow', () => {
     const result = tanaIntegration({ markdown, context, template, taskSuperTag: 'SUPER_TAG' })
 
     expect(result).toEqual([{ children: [], name: "<span data-inlineref-date='{\"dateTimeString\":\"2021-02\"}'></span>", type: 'node' }])
+  })
+
+  it('Flow with tana anchors with super tag', () => {
+    const context = {
+      source: {
+      },
+      people: [
+      ],
+      keywords: {
+        organizations: [],
+        places: [],
+        people: [],
+        collections: [],
+        hashTags: [],
+        subject: [],
+        emails: [],
+        atMentions: [],
+        urls: [],
+        phoneNumbers: [],
+        acronyms: [],
+        quotations: []
+      },
+      clipContent: false
+    }
+    const markdown = `
+  - [ ] sdsdds
+    - [ ] sddsds
+    - [ ] dsdsds
+    `
+
+    const result = tanaIntegration({ markdown, context, template, taskSuperTag: 'SUPER_TAG' })
+
+    expect(result).toEqual([{
+      children: [
+        { name: '[ ] sddsds', type: 'node' },
+        { name: '[ ] dsdsds', type: 'node' }
+      ],
+      name: 'sdsdds',
+      type: 'node',
+      supertags: [
+        {
+          id: 'SUPER_TAG'
+        }
+      ]
+    }])
   })
 })
